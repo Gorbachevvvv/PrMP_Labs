@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.PrMP_Labs" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Настройки темы -->
+        <item name="colorPrimary">@color/button_purple</item>
+        <item name="colorPrimaryDark">@color/button_darkpurple</item>
+        <item name="colorAccent">@color/past_date</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <style name="edittext">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/height_60</item>
+        <item name="android:textSize">@dimen/text_font_20</item>
+        <item name="android:textColorHint">@color/hint</item>
+        <item name="android:background">@drawable/edittext_background</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:padding">@dimen/padding_16</item>
+        <item name="android:layout_marginBottom">@dimen/margin_40</item>
+    </style>
+
+    <style name="thintext">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:textSize">@dimen/text_font_17</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="boldtext">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_font_17</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="buttonreg">
+        <item name="android:clickable">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">100dp</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textSize">@dimen/text_font_20</item>
+        <item name="android:textAppearance">
+            @style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small
+        </item>
+        <item name="android:textColor">@color/textcolor1</item>
+    </style>
+
+    <style name="backgroundimage">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="datepicker">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:calendarTextColor">@color/black</item>
+        <item name="android:headerBackground">@color/edittext_bg</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+</resources>

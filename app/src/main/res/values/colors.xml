@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="hint">#99879D</color>
+    <color name="textcolor1">#FFF</color>
+    <color name="edittext_bg">#FBEEFF</color>
+    <color name="table_transparent_bg">#CBFFFFFF</color>
+    <color name="button_darkpurple">#3700B3</color>
+    <color name="button_purple">#6200EE</color>
+    <color name="past_date">#F8C1C1</color>
+    <color name="today_date">#C8E6C9</color>
+</resources>
