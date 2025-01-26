@@ -17,12 +17,12 @@ class LoginActivity : AppCompatActivity() {
 
         binding.returntext.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)  // Не забывайте запускать активность
+            startActivity(intent)
         }
 
         binding.loginButton.setOnClickListener {
             if (validateInput()) {
-                val intent = Intent(this, WelcomeActivity::class.java) // Переход на другую активность после успешного логина
+                val intent = Intent(this, CalculatorActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateInput(): Boolean {
         val email = binding.emailEditText.text.toString()
-        val password = binding.passwordEditText.text.toString()  // Используйте text.toString() для получения текста
+        val password = binding.passwordEditText.text.toString()
 
         if (email.isEmpty()) {
             binding.emailEditText.error = "Поле должно быть заполнено"
@@ -44,8 +44,6 @@ class LoginActivity : AppCompatActivity() {
             binding.passwordEditText.error = "Поле должно быть заполнено"
             return false
         }
-
-        // Можно добавить дополнительные проверки для пароля, если требуется
 
         return true
     }

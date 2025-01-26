@@ -2,12 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="hint">#99879D</color>
-    <color name="textcolor1">#FFF</color>
-    <color name="edittext_bg">#FBEEFF</color>
+    <color name="hint">#B9B6B9</color>
+    <color name="b_c">#f1651d</color>
+    <color name="b_c2">#f0eff1</color>
+    <color name="textcolor1">#FFFFFF</color>
+    <color name="edittext_bg">#D4D5D9</color>
     <color name="table_transparent_bg">#CBFFFFFF</color>
-    <color name="button_darkpurple">#3700B3</color>
-    <color name="button_purple">#6200EE</color>
-    <color name="past_date">#F8C1C1</color>
-    <color name="today_date">#C8E6C9</color>
+    <color name="button_darktian">#9DBDC4</color>
+    <color name="button_tian"> #71BCC3</color>
 </resources>

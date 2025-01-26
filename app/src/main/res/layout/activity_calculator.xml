@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="0dp"
+        android:gravity="top"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/operation"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:gravity="end"
+            android:textSize="50sp"
+            android:ellipsize="start"
+            android:text=""
+            android:singleLine="true"
+            />
+            <TextView
+                android:id="@+id/result"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:gravity="end"
+                android:textSize="30sp"
+                android:ellipsize="start"
+                android:text=""
+                android:singleLine="true"
+                />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="vertical">
+        <!--Строка 1-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:text="sqrt"
+                android:id="@+id/b_sqrt"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="log2"
+                android:id="@+id/b_log2"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="ln"
+                android:id="@+id/b_ln"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="("
+                android:id="@+id/b_leftb"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text=")"
+                android:id="@+id/b_rightb"
+                style="@style/Operations">
+            </TextView>
+
+        </LinearLayout>
+        <!--Строка 2-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:text="x^2"
+                android:id="@+id/b_power"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="AC"
+                android:id="@+id/ac"
+                style="@style/Operations_Sci">
+            </TextView>
+
+            <TextView
+                android:text="back"
+                android:id="@+id/back"
+                style="@style/Operations_Sci">
+            </TextView>
+
+            <TextView
+                android:text="%"
+                android:id="@+id/percent"
+                style="@style/Operations_Sci">
+            </TextView>
+
+            <TextView
+                android:text="/"
+                android:id="@+id/devide"
+                style="@style/Operations_Sci">
+            </TextView>
+
+        </LinearLayout>
+        <!--Строка 3-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:text="sin"
+                android:id="@+id/sin"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="7"
+                android:id="@+id/b7"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="8"
+                android:id="@+id/b8"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="9"
+                android:id="@+id/b9"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="*"
+                android:id="@+id/multiplication"
+                style="@style/Operations_Sci">
+            </TextView>
+        </LinearLayout>
+        <!--Строка 4-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:text="cos"
+                android:id="@+id/cos"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="4"
+                android:id="@+id/b4"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="5"
+                android:id="@+id/b5"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="6"
+                android:id="@+id/b6"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="-"
+                android:id="@+id/minus"
+                style="@style/Operations_Sci">
+            </TextView>
+
+        </LinearLayout>
+        <!--Строка 5-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:text="pi"
+                android:id="@+id/pi"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="1"
+                android:id="@+id/b1"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="2"
+                android:id="@+id/b2"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="3"
+                android:id="@+id/b3"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="+"
+                android:id="@+id/plus"
+                style="@style/Operations_Sci">
+            </TextView>
+
+        </LinearLayout>
+        <!--Строка 6-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:text="e"
+                android:id="@+id/e"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="000"
+                android:id="@+id/tiple"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="."
+                android:id="@+id/dot"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="0"
+                android:id="@+id/zero"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="="
+                android:id="@+id/equal"
+                style="@style/Operations_equal">
+            </TextView>
+
+
+        </LinearLayout>
+</LinearLayout>
+
+
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

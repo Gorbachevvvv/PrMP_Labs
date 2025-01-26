@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.PrMP_Labs" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Настройки темы -->
-        <item name="colorPrimary">@color/button_purple</item>
-        <item name="colorPrimaryDark">@color/button_darkpurple</item>
-        <item name="colorAccent">@color/past_date</item>
-        <item name="android:windowBackground">@color/white</item>
+        <item name="colorPrimary">@color/button_tian</item>
+        <item name="colorPrimaryDark">@color/button_darktian</item>
     </style>
 
     <style name="edittext">
@@ -54,13 +51,44 @@
         <item name="android:scaleType">fitXY</item>
     </style>
 
-    <style name="datepicker">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:calendarTextColor">@color/black</item>
-        <item name="android:headerBackground">@color/edittext_bg</item>
-        <item name="android:textColorPrimary">@color/black</item>
-        <item name="android:textColorSecondary">@color/black</item>
-        <item name="android:textColor">@color/black</item>
+    <style name = "Operations">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/button_tian</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/b_c2</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">0.5dp</item>
+    </style>
+    <style name = "Operations_Sci">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/button_tian</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/b_c</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">0.5dp</item>
+    </style>
+    <style name = "Numbers">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/button_tian</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">0.5dp</item>
+    </style>
+    <style name = "Operations_equal">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/b_c</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">0.5dp</item>
     </style>
 </resources>
