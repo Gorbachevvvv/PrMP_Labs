@@ -60,44 +60,6 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp">
-
-            <TextView
-                android:text="sqrt"
-                android:id="@+id/b_sqrt"
-                style="@style/Operations">
-            </TextView>
-
-            <TextView
-                android:text="log2"
-                android:id="@+id/b_log2"
-                style="@style/Operations">
-            </TextView>
-
-            <TextView
-                android:text="ln"
-                android:id="@+id/b_ln"
-                style="@style/Operations">
-            </TextView>
-
-            <TextView
-                android:text="("
-                android:id="@+id/b_leftb"
-                style="@style/Operations">
-            </TextView>
-
-            <TextView
-                android:text=")"
-                android:id="@+id/b_rightb"
-                style="@style/Operations">
-            </TextView>
-
-        </LinearLayout>
-        <!--Строка 2-->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
             <TextView
                 android:text="x^2"
                 android:id="@+id/b_power"
@@ -129,7 +91,7 @@
             </TextView>
 
         </LinearLayout>
-        <!--Строка 3-->
+        <!--Строка 2-->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_weight="1"
@@ -137,8 +99,8 @@
             android:layout_height="0dp">
 
             <TextView
-                android:text="sin"
-                android:id="@+id/sin"
+                android:text="("
+                android:id="@+id/b_leftb"
                 style="@style/Operations">
             </TextView>
 
@@ -166,18 +128,17 @@
                 style="@style/Operations_Sci">
             </TextView>
         </LinearLayout>
-        <!--Строка 4-->
+        <!--Строка 3-->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <TextView
-                android:text="cos"
-                android:id="@+id/cos"
+                android:text=")"
+                android:id="@+id/b_rightb"
                 style="@style/Operations">
             </TextView>
-
             <TextView
                 android:text="4"
                 android:id="@+id/b4"
@@ -203,7 +164,7 @@
             </TextView>
 
         </LinearLayout>
-        <!--Строка 5-->
+        <!--Строка 4-->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_weight="1"
@@ -240,7 +201,7 @@
             </TextView>
 
         </LinearLayout>
-        <!--Строка 6-->
+        <!--Строка 5-->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_weight="1"
