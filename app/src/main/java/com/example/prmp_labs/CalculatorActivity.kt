@@ -46,10 +46,24 @@ class CalculatorActivity : AppCompatActivity() {
             }
         }
 
+        fun appendOperator2(operator: String) {
+            val expr = operation.text.toString()
+            if (expr.isNotEmpty() && expr.length < 12 && expr != "Ошибка" && expr != "too" && expr != "Infinity" && !isOperator(expr.last())) {
+                operation.append(operator)
+            }
+            if (expr.isNotEmpty() && expr.length<12 && isOperator((expr.last()))&&(operator=="(" || operator=="e" || operator=="π"))
+            {
+                operation.append(operator)
+            }
+            if (expr.isEmpty() &&(operator=="(" || operator=="e" || operator=="π"))
+            {
+                operation.append(operator)
+            }
+        }
 
-        findViewById<TextView>(R.id.b_leftb).setOnClickListener { operation.append("(") }
-        findViewById<TextView>(R.id.b_rightb).setOnClickListener { operation.append(")") }
-        findViewById<TextView>(R.id.b_power).setOnClickListener { operation.append("^2") }
+        findViewById<TextView>(R.id.b_leftb).setOnClickListener { appendOperator2("(") }
+        findViewById<TextView>(R.id.b_rightb).setOnClickListener { appendOperator2(")") }
+        findViewById<TextView>(R.id.b_power).setOnClickListener { appendOperator2("^2") }
         findViewById<TextView>(R.id.ac).setOnClickListener {
             operation.text = ""
             result.text = ""
@@ -68,13 +82,13 @@ class CalculatorActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.b5).setOnClickListener { appendNumber("5") }
         findViewById<TextView>(R.id.b6).setOnClickListener { appendNumber("6") }
         findViewById<TextView>(R.id.minus).setOnClickListener { appendOperator("-") }
-        findViewById<TextView>(R.id.pi).setOnClickListener { operation.append("π") }
+        findViewById<TextView>(R.id.pi).setOnClickListener { appendOperator2("π") }
         findViewById<TextView>(R.id.b1).setOnClickListener { appendNumber("1") }
         findViewById<TextView>(R.id.b2).setOnClickListener { appendNumber("2") }
         findViewById<TextView>(R.id.b3).setOnClickListener { appendNumber("3") }
         findViewById<TextView>(R.id.plus).setOnClickListener { appendOperator("+") }
-        findViewById<TextView>(R.id.e).setOnClickListener { operation.append("e") }
-        findViewById<TextView>(R.id.tiple).setOnClickListener { operation.append("000") }
+        findViewById<TextView>(R.id.e).setOnClickListener { appendOperator2("e") }
+        findViewById<TextView>(R.id.tiple).setOnClickListener { appendOperator2("000") }
         findViewById<TextView>(R.id.dot).setOnClickListener { appendNumber(".") }
         findViewById<TextView>(R.id.zero).setOnClickListener { appendNumber("0") }
 
@@ -104,28 +118,35 @@ class CalculatorActivity : AppCompatActivity() {
                     val resultValue = evaluate(fixedExpr)
 
                     val resultString = if (!resultValue.isNaN()) {
-                        if (resultValue % 1 == 0.0) resultValue.toInt().toString() else resultValue.toString()
+                        val formatted = String.format("%.10f", resultValue).trimEnd('0').trimEnd('.')
+                        if (formatted.length > 12) {
+                            val parts = formatted.split('.')
+                            val intPart = parts[0]
+                            val decimalPart = if (parts.size > 1) parts[1] else ""
+
+                            if (intPart.length >= 12) {
+                                intPart.take(12)
+                            } else {
+                                val availableDecimals = 12 - intPart.length
+                                if (availableDecimals > 0) {
+                                    "$intPart.${decimalPart.take(availableDecimals)}"
+                                } else {
+                                    intPart
+                                }
+                            }
+                        } else {
+                            formatted
+                        }
                     } else {
                         "Ошибка"
                     }
 
-                    if (resultString.length > 12) {
-                        result.text = "too many symbls"
-                    } else {
-                        result.text = resultString
-                    }
+                    result.text = resultString
+                    operation.text = resultString
 
-                    operation.text = result.text
                 }
             }
         }
-
-
-
-        val clearOnError = { operation.text = ""; result.text = "" }
-        // Error clearing on pressing other buttons.
-
-
 
 
 
@@ -133,8 +154,12 @@ class CalculatorActivity : AppCompatActivity() {
 
     private fun evaluateExpression(expression: String): Double {
         var expr = expression
+        expr = expr.replace("πe", "π*e")
+        expr = expr.replace("eπ", "π*e")
+
         expr = expr.replace("π", Math.PI.toString())
         expr = expr.replace("e", Math.E.toString())
+
         return try {
             evaluatePostfix(infixToPostfix(expr))
         } catch (e: Exception) {
