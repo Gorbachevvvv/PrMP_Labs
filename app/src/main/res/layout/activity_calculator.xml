@@ -20,33 +20,39 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true">
 
-            <TextView
-                android:id="@+id/operation"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:gravity="end"
-            android:textSize="50sp"
-            android:ellipsize="start"
-            android:text=""
-            android:singleLine="true"
-            />
+                <TextView
+                    android:id="@+id/operation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:gravity="end"
+                    android:textSize="50sp"
+                    android:ellipsize="start"
+                    android:text=""
+                    android:singleLine="true"
+                    />
+
+            </HorizontalScrollView>
+
             <TextView
                 android:id="@+id/result"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:gravity="end"
-                android:textSize="30sp"
                 android:ellipsize="start"
-                android:text=""
+                android:gravity="end"
                 android:singleLine="true"
-                />
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="30sp" />
 
-    </LinearLayout>
+        </LinearLayout>
 
 
     <LinearLayout
@@ -55,6 +61,42 @@
     android:layout_weight="1"
     android:orientation="vertical">
         <!--Строка 1-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:text="sin"
+                android:id="@+id/b_sin"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="cos"
+                android:id="@+id/b_cos"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="√"
+                android:id="@+id/b_sqrt"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="tan"
+                android:id="@+id/b_tan"
+                style="@style/Operations">
+            </TextView>
+
+            <TextView
+                android:text="ctg"
+                android:id="@+id/b_ctg"
+                style="@style/Operations">
+            </TextView>
+
+        </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_weight="1"
@@ -73,7 +115,7 @@
             </TextView>
 
             <TextView
-                android:text="back"
+                android:text="⌫"
                 android:id="@+id/back"
                 style="@style/Operations_Sci">
             </TextView>

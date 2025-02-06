@@ -1,6 +1,8 @@
 package com.example.prmp_labs
 
+import net.objecthunter.exp4j.ExpressionBuilder
 import android.os.Bundle
+import android.widget.HorizontalScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
@@ -15,6 +17,7 @@ class CalculatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val horizontalScrollView: HorizontalScrollView = findViewById(R.id.horizontalScrollView)
         val operation: TextView = findViewById(R.id.operation)
         val result: TextView = findViewById(R.id.result)
 
@@ -25,42 +28,45 @@ class CalculatorActivity : AppCompatActivity() {
                 Double.NaN
             }
         }
-
+        fun scrollToEnd() {
+            horizontalScrollView.post {
+                horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT)
+            }
+        }
         fun isOperator(c: Char): Boolean {
             return c in listOf('+', '-', '*', '/', '%', '^', '.')
         }
 
         fun appendOperator(operator: String) {
             val expr = operation.text.toString()
-            if (expr.isNotEmpty() && !isOperator(expr.last()) && expr.length < 12 && expr != "Ошибка" && expr != "too"&& expr != "Infinity") {
+            if (expr.isNotEmpty() && !isOperator(expr.last()) && expr.length < 40 && expr != "Ошибка" && expr != "too"&& expr != "Infinity") {
                 operation.append(operator)
+                scrollToEnd()
             }
         }
 
         fun appendNumber(number: String) {
             val expr = operation.text.toString()
-            if (number == "." && expr.isNotEmpty() && expr.last().isDigit() && !expr.contains(".") && expr.length < 12 && expr != "Ошибка" && expr != "too" && expr != "Infinity") {
+            if (number == "." && expr.isNotEmpty() && expr.last().isDigit() && !expr.contains(".") && expr.length <40 && expr != "Ошибка" && expr != "too" && expr != "Infinity") {
                 operation.append(number)
-            } else if (number != "." && expr.length < 12) {
+                scrollToEnd()
+            } else if (number != "." && expr.length < 40) {
                 operation.append(number)
+                scrollToEnd()
             }
         }
-
+        fun isFunction(token: String): Boolean {
+            return token in listOf("sin(", "cos(", "tan(", "ctg(", "sqrt(")
+        }
         fun appendOperator2(operator: String) {
             val expr = operation.text.toString()
-            if (expr.isNotEmpty() && expr.length < 12 && expr != "Ошибка" && expr != "too" && expr != "Infinity" && !isOperator(expr.last())) {
-                operation.append(operator)
-            }
-            if (expr.isNotEmpty() && expr.length<12 && isOperator((expr.last()))&&(operator=="(" || operator=="e" || operator=="π"))
-            {
-                operation.append(operator)
-            }
-            if (expr.isEmpty() &&(operator=="(" || operator=="e" || operator=="π"))
-            {
-                operation.append(operator)
+            if (expr.isNotEmpty() && expr.length < 40 && expr != "Ошибка" && expr != "too" && expr != "Infinity") {
+                if (!isOperator(expr.last()) || operator == "(" || operator == "e" || operator == "π" || isFunction(operator)) {
+                    operation.append(if (isFunction(operator)) "$operator" else operator)
+                    scrollToEnd()
+                }
             }
         }
-
         findViewById<TextView>(R.id.b_leftb).setOnClickListener { appendOperator2("(") }
         findViewById<TextView>(R.id.b_rightb).setOnClickListener { appendOperator2(")") }
         findViewById<TextView>(R.id.b_power).setOnClickListener { appendOperator2("^2") }
@@ -91,7 +97,11 @@ class CalculatorActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tiple).setOnClickListener { appendOperator2("000") }
         findViewById<TextView>(R.id.dot).setOnClickListener { appendNumber(".") }
         findViewById<TextView>(R.id.zero).setOnClickListener { appendNumber("0") }
-
+        findViewById<TextView>(R.id.b_sin).setOnClickListener { appendOperator2("sin(") }
+        findViewById<TextView>(R.id.b_cos).setOnClickListener { appendOperator2("cos(") }
+        findViewById<TextView>(R.id.b_sqrt).setOnClickListener { appendOperator2("sqrt(") }
+        findViewById<TextView>(R.id.b_tan).setOnClickListener { appendOperator2("tan(") }
+        findViewById<TextView>(R.id.b_ctg).setOnClickListener { appendOperator2("ctg(") }
         findViewById<TextView>(R.id.equal).setOnClickListener {
             val expr = operation.text.toString()
 
@@ -175,7 +185,6 @@ class CalculatorActivity : AppCompatActivity() {
         var i = 0
         while (i < expression.length) {
             val c = expression[i]
-
             when {
                 c.isDigit() || c == '.' -> {
                     var num = ""
@@ -186,7 +195,6 @@ class CalculatorActivity : AppCompatActivity() {
                     output.add(num)
                     continue
                 }
-
                 c == '(' -> operators.push(c)
                 c == ')' -> {
                     while (operators.isNotEmpty() && operators.peek() != '(') {
@@ -194,15 +202,14 @@ class CalculatorActivity : AppCompatActivity() {
                     }
                     operators.pop()
                 }
-
                 c in precedence -> {
                     while (operators.isNotEmpty() && operators.peek() != '(' &&
-                        precedence[operators.peek()]!! >= precedence[c]!!) {
+                        precedence[operators.peek()]!! >= precedence[c]!!
+                    ) {
                         output.add(operators.pop().toString())
                     }
                     operators.push(c)
                 }
-
                 c.isLetter() -> {  // Обрабатываем функции
                     var func = ""
                     while (i < expression.length && expression[i].isLetter()) {
@@ -219,7 +226,6 @@ class CalculatorActivity : AppCompatActivity() {
         while (operators.isNotEmpty()) {
             output.add(operators.pop().toString())
         }
-
         return output
     }
 
@@ -236,13 +242,19 @@ class CalculatorActivity : AppCompatActivity() {
 
             when {
                 token.toDoubleOrNull() != null -> stack.push(token.toDouble())
-
-                token == "sqrt" -> {
+                token in listOf("sin", "cos", "tan", "cot", "sqrt") -> {
                     val (result, nextIndex) = evaluatePostfixRecursive(postfix, i + 1)
-                    stack.push(sqrt(result))
+                    val value = when (token) {
+                        "sin" -> sin(result)
+                        "cos" -> cos(result)
+                        "tan" -> tan(result)
+                        "cot" -> 1 / tan(result)
+                        "sqrt" -> sqrt(result)
+                        else -> Double.NaN
+                    }
+                    stack.push(value)
                     i = nextIndex
                 }
-
                 else -> {
                     if (stack.size >= 2) {
                         val b = stack.pop()
