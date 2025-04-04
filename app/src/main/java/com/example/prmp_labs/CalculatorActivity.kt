@@ -1,18 +1,21 @@
 package com.example.prmp_labs
 
-import net.objecthunter.exp4j.ExpressionBuilder
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.widget.HorizontalScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GestureDetectorCompat
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.prmp_labs.databinding.ActivityCalculatorBinding
-import java.util.*
+import java.util.Stack
 import kotlin.math.*
 
 class CalculatorActivity : AppCompatActivity() {
     private val binding by viewBinding<ActivityCalculatorBinding>(CreateMethod.INFLATE)
+    private lateinit var gestureDetector: GestureDetectorCompat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +23,10 @@ class CalculatorActivity : AppCompatActivity() {
         val horizontalScrollView: HorizontalScrollView = findViewById(R.id.horizontalScrollView)
         val operation: TextView = findViewById(R.id.operation)
         val result: TextView = findViewById(R.id.result)
-
+        gestureDetector = GestureDetectorCompat(this, MyGestureListener(operation))
+        horizontalScrollView.setOnTouchListener { _, event ->
+            gestureDetector.onTouchEvent(event)
+        }
         fun evaluate(expression: String): Double {
             return try {
                 evaluateExpression(expression)
@@ -39,7 +45,7 @@ class CalculatorActivity : AppCompatActivity() {
 
         fun appendOperator(operator: String) {
             val expr = operation.text.toString()
-            if (expr.isNotEmpty() && !isOperator(expr.last()) && expr.length < 40 && expr != "Ошибка" && expr != "too"&& expr != "Infinity") {
+            if (expr.isNotEmpty() && !isOperator(expr.last()) && expr.length < 70 && expr != "Ошибка" && expr != "too"&& expr != "Infinity" && expr.last() != '.') {
                 operation.append(operator)
                 scrollToEnd()
             }
@@ -47,10 +53,10 @@ class CalculatorActivity : AppCompatActivity() {
 
         fun appendNumber(number: String) {
             val expr = operation.text.toString()
-            if (number == "." && expr.isNotEmpty() && expr.last().isDigit() && !expr.contains(".") && expr.length <40 && expr != "Ошибка" && expr != "too" && expr != "Infinity") {
+            if (number == "." && expr.isNotEmpty() && expr.last().isDigit() && !expr.contains(".") && expr.length <70 && expr != "Ошибка" && expr != "too" && expr != "Infinity") {
                 operation.append(number)
                 scrollToEnd()
-            } else if (number != "." && expr.length < 40) {
+            } else if (number != "." && expr.length < 70) {
                 operation.append(number)
                 scrollToEnd()
             }
@@ -60,14 +66,24 @@ class CalculatorActivity : AppCompatActivity() {
         }
         fun appendOperator2(operator: String) {
             val expr = operation.text.toString()
-            if (expr.isNotEmpty() && expr.length < 40 && expr != "Ошибка" && expr != "too" && expr != "Infinity") {
+            if (expr.isNotEmpty() && expr.length < 70 && expr != "Ошибка" && expr != "too" && expr != "Infinity" && expr.last() != '.') {
                 if (!isOperator(expr.last()) || operator == "(" || operator == "e" || operator == "π" || isFunction(operator)) {
                     operation.append(if (isFunction(operator)) "$operator" else operator)
                     scrollToEnd()
                 }
             }
         }
-        findViewById<TextView>(R.id.b_leftb).setOnClickListener { appendOperator2("(") }
+        fun appendOperator3(operator: String) {
+            val expr = operation.text.toString()
+            if (expr.isEmpty() || expr.length < 70 && expr != "Ошибка" && expr != "too" && expr != "Infinity" && expr.last() != '.') {
+                if (expr.isEmpty() || !isOperator(expr.last()) || operator == "(" || operator == "e" || operator == "π" || isFunction(operator)) {
+                    operation.append(operator)
+                    scrollToEnd()
+                }
+            }
+        }
+
+        findViewById<TextView>(R.id.b_leftb).setOnClickListener { appendOperator3("(") }
         findViewById<TextView>(R.id.b_rightb).setOnClickListener { appendOperator2(")") }
         findViewById<TextView>(R.id.b_power).setOnClickListener { appendOperator2("^2") }
         findViewById<TextView>(R.id.ac).setOnClickListener {
@@ -88,20 +104,20 @@ class CalculatorActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.b5).setOnClickListener { appendNumber("5") }
         findViewById<TextView>(R.id.b6).setOnClickListener { appendNumber("6") }
         findViewById<TextView>(R.id.minus).setOnClickListener { appendOperator("-") }
-        findViewById<TextView>(R.id.pi).setOnClickListener { appendOperator2("π") }
+        findViewById<TextView>(R.id.pi).setOnClickListener { appendOperator3("π") }
         findViewById<TextView>(R.id.b1).setOnClickListener { appendNumber("1") }
         findViewById<TextView>(R.id.b2).setOnClickListener { appendNumber("2") }
         findViewById<TextView>(R.id.b3).setOnClickListener { appendNumber("3") }
         findViewById<TextView>(R.id.plus).setOnClickListener { appendOperator("+") }
-        findViewById<TextView>(R.id.e).setOnClickListener { appendOperator2("e") }
+        findViewById<TextView>(R.id.e).setOnClickListener { appendOperator3("e") }
         findViewById<TextView>(R.id.tiple).setOnClickListener { appendOperator2("000") }
         findViewById<TextView>(R.id.dot).setOnClickListener { appendNumber(".") }
         findViewById<TextView>(R.id.zero).setOnClickListener { appendNumber("0") }
-        findViewById<TextView>(R.id.b_sin).setOnClickListener { appendOperator2("sin(") }
-        findViewById<TextView>(R.id.b_cos).setOnClickListener { appendOperator2("cos(") }
-        findViewById<TextView>(R.id.b_sqrt).setOnClickListener { appendOperator2("sqrt(") }
-        findViewById<TextView>(R.id.b_tan).setOnClickListener { appendOperator2("tan(") }
-        findViewById<TextView>(R.id.b_ctg).setOnClickListener { appendOperator2("ctg(") }
+        findViewById<TextView>(R.id.b_sin).setOnClickListener { appendOperator3("sin(") }
+        findViewById<TextView>(R.id.b_cos).setOnClickListener { appendOperator3("cos(") }
+        findViewById<TextView>(R.id.b_sqrt).setOnClickListener { appendOperator3("sqrt(") }
+        findViewById<TextView>(R.id.b_tan).setOnClickListener { appendOperator3("tan(") }
+        findViewById<TextView>(R.id.b_ctg).setOnClickListener { appendOperator3("ctg(") }
         findViewById<TextView>(R.id.equal).setOnClickListener {
             val expr = operation.text.toString()
 
@@ -276,6 +292,36 @@ class CalculatorActivity : AppCompatActivity() {
         return Pair(stack.pop(), i)
     }
 
+    class MyGestureListener(val operation: TextView) : GestureDetector.SimpleOnGestureListener() {
 
+        // Минимальная дистанция для свайпа
+        private val swipeThreshold = 100
+        // Минимальная скорость для свайпа
+        private val swipeVelocityThreshold = 100
+
+        override fun onFling(
+            e1: MotionEvent?,
+            e2: MotionEvent,
+            velocityX: Float,
+            velocityY: Float
+        ): Boolean {
+            if (e1 == null) return false
+
+            val diffX = e2.x - e1.x // Разница по оси X
+            val diffY = e2.y - e1.y // Разница по оси Y
+
+            // Проверка, что это свайп справа налево
+            if (Math.abs(diffX) > Math.abs(diffY) && // Преобладание движения по X
+                Math.abs(diffX) > swipeThreshold && // Дистанция свайпа
+                Math.abs(velocityX) > swipeVelocityThreshold // Скорость свайпа
+            ) {
+                if (diffX < 0) { // Свайп справа налево
+                    operation.text = ""
+                    return true
+                }
+            }
+            return false
+        }
+    }
 
 }

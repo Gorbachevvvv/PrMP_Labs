@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "119300268536",
+    "project_id": "calculator-a17e8",
+    "storage_bucket": "calculator-a17e8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119300268536:android:fa82d8645ad40b9fe0360d",
+        "android_client_info": {
+          "package_name": "com.example.prmp_labs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBodSz3cYw3mKgcvgXU_ZJ1k4pgFYw884w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

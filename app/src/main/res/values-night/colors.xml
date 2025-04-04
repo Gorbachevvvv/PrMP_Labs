@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="hint">#B9B6B9</color>
+    <color name="b_c">#f1651d</color>
+    <color name="b_c2">#f0eff1</color>
+    <color name="textcolor1">#FFFFFF</color>
+    <color name="edittext_bg">#D4D5D9</color>
+    <color name="table_transparent_bg">#CBFFFFFF</color>
+    <color name="button_darktian">#9DBDC4</color>
+    <color name="button_tian"> #71BCC3</color>
+</resources>
